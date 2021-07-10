@@ -8,6 +8,17 @@ tf_prompt_info() {
 	fi
 }
 
+tf_workspace_info() {
+	profile="$(terraform workspace show)"
+	[[ -z "$profile" ]] && return
+	echo "<ft:$profile>"
+}
+
+if [[ "$RPROMPT" != *'$(tf_workspace_info)'* ]]; then
+  RPROMPT='$(tf_workspace_info)'"$RPROMPT"
+fi
+
+
 # If you notice, aliases are bounded to each other
 # Why? Gives the freedom to override the lower levels and to affect all of them
 # e.g.: alias tfi=terraform init -no-color -reconfigure
