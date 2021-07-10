@@ -8,13 +8,14 @@ tf_prompt_info() {
 	fi
 }
 
+profile="$(terraform workspace show)"
+
 tf_workspace_info() {
-	profile="$(terraform workspace show)"
 	[[ -z "$profile" ]] && return
 	echo "<ft:$profile>"
 }
 
-if [[ "$RPROMPT" != *'$(tf_workspace_info)'* ]]; then
+if [[ "$RPROMPT" != *'$(tf_workspace_info)'* && $profile != "default"]]; then
   RPROMPT='$(tf_workspace_info)'"$RPROMPT"
 fi
 
