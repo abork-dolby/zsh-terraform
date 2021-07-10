@@ -15,7 +15,7 @@ tf_workspace_info() {
 	echo "<ft:$profile>"
 }
 
-if [[ "$RPROMPT" != *'$(tf_workspace_info)'* && $profile != 'default']]; then
+if [[ "$RPROMPT" != *'$(tf_workspace_info)'*]]; then
   RPROMPT='$(tf_workspace_info)'"$RPROMPT"
 fi
 
